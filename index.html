@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Molly Loch — Actress &amp; Model</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#0d1b2a; --navy-mid:#162030; --navy-light:#1e2d3d;
+    --navy-border:#2a3f55; --gold:#c9a96e; --gold-light:#e8cfa0;
+    --white:#f5f2ee; --white-dim:rgba(245,242,238,0.65);
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--navy);color:var(--white);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.6rem 4rem;background:linear-gradient(to bottom,rgba(13,27,42,0.95),transparent);backdrop-filter:blur(4px);}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;letter-spacing:0.18em;color:var(--white);text-decoration:none;}
+  .nav-logo span{color:var(--gold);}
+  .nav-links{display:flex;gap:2.4rem;list-style:none;}
+  .nav-links a{font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--white-dim);text-decoration:none;transition:color 0.3s;}
+  .nav-links a:hover{color:var(--gold);}
+  .nav-dropdown{position:relative;}
+  .nav-dropdown > a::after{content:' ▾';font-size:0.55rem;}
+  .nav-submenu{display:none;position:absolute;top:100%;left:50%;padding-top:0.8rem;transform:translateX(-50%);background:#0d1b2a;border:1px solid var(--navy-border);min-width:170px;z-index:9999;list-style:none;box-shadow:0 8px 24px rgba(0,0,0,0.6);}
+  .nav-submenu.open{display:block;}
+  .nav-dropdown:hover .nav-submenu{display:block;}
+  .nav-submenu li a{display:block;padding:0.75rem 1.2rem;font-size:0.66rem;letter-spacing:0.2em;color:var(--white-dim);border-bottom:1px solid var(--navy-border);white-space:nowrap;text-decoration:none;text-transform:uppercase;}
+  .nav-submenu li:last-child a{border-bottom:none;}
+  .nav-submenu li a:hover{color:var(--gold);background:rgba(201,169,110,0.05);}
+
+  #hero{height:100vh;display:flex;align-items:flex-end;padding:0 4rem 5rem;position:relative;overflow:hidden;background:var(--navy);}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 70% 40%,rgba(30,50,80,0.6) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 30% 60%,rgba(201,169,110,0.06) 0%,transparent 60%);}
+  .hero-lines{position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(42,63,85,0.3) 80px);}
+  .hero-photo-area{position:absolute;right:0;top:0;bottom:0;width:52%;overflow:hidden;}
+  .hero-photo-area img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+  .hero-fade{position:absolute;left:0;top:0;bottom:0;width:55%;background:linear-gradient(to right,var(--navy) 40%,transparent);pointer-events:none;}
+  .hero-content{position:relative;z-index:2;max-width:540px;}
+  .hero-eyebrow{font-size:0.68rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;animation:fadeUp 0.8s ease 0.2s both;}
+  .hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,7vw,6rem);font-weight:300;line-height:1.0;color:var(--white);margin-bottom:1.4rem;animation:fadeUp 0.8s ease 0.4s both;}
+  .hero-name em{font-style:italic;color:var(--gold-light);}
+  .hero-stats{display:flex;gap:2rem;margin-bottom:1.4rem;animation:fadeUp 0.8s ease 0.5s both;}
+  .hero-stat{font-size:0.72rem;letter-spacing:0.15em;color:var(--white-dim);}
+  .hero-stat span{display:block;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.25em;color:var(--gold);margin-bottom:0.2rem;}
+  .hero-tagline{font-size:0.85rem;letter-spacing:0.08em;color:var(--white-dim);line-height:1.8;margin-bottom:2.4rem;max-width:360px;animation:fadeUp 0.8s ease 0.55s both;}
+  .hero-cta{animation:fadeUp 0.8s ease 0.7s both;}
+  .btn{display:inline-block;padding:0.85rem 2.2rem;border:1px solid var(--gold);color:var(--gold);font-family:'Jost',sans-serif;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;background:transparent;cursor:pointer;}
+  .btn:hover{background:var(--gold);color:var(--navy);}
+  .btn-solid{background:var(--gold);color:var(--navy);}
+  .btn-solid:hover{background:var(--gold-light);}
+
+  section{padding:7rem 4rem;}
+  .section-header{margin-bottom:4rem;}
+  .section-label{font-size:0.68rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;}
+  .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--white);line-height:1.2;}
+  .divider{width:4rem;height:1px;background:linear-gradient(to right,var(--gold),transparent);margin:1.4rem 0 0;}
+
+  #resume{background:var(--navy-mid);}
+  .resume-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;}
+  .resume-col h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--gold);letter-spacing:0.08em;margin-bottom:2rem;padding-bottom:0.8rem;border-bottom:1px solid var(--navy-border);margin-top:2.5rem;}
+  .resume-col h3:first-child{margin-top:0;}
+  .resume-item{margin-bottom:1.5rem;}
+  .resume-item-title{font-size:0.88rem;font-weight:500;color:var(--white);letter-spacing:0.05em;}
+  .resume-item-sub{font-size:0.78rem;color:var(--gold-light);margin:0.2rem 0;font-style:italic;font-family:'Cormorant Garamond',serif;}
+  .resume-item-detail{font-size:0.72rem;color:var(--white-dim);letter-spacing:0.04em;}
+  .skills-grid{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;}
+  .skill-tag{padding:0.3rem 0.9rem;border:1px solid var(--navy-border);font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--white-dim);border-radius:1px;}
+
+  #reels{background:var(--navy);}
+  .reels-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+  .reel-card{background:var(--navy-light);border:1px solid var(--navy-border);aspect-ratio:16/9;position:relative;overflow:hidden;cursor:pointer;transition:border-color 0.3s,transform 0.3s;display:flex;align-items:center;justify-content:center;}
+  .reel-card:hover{border-color:var(--gold);transform:translateY(-3px);}
+  .reel-card .reel-label{position:absolute;bottom:0;left:0;right:0;padding:1rem;background:linear-gradient(transparent,rgba(13,27,42,0.95));font-size:0.75rem;letter-spacing:0.1em;color:var(--white);}
+  .reel-card .reel-label span{display:block;font-size:0.65rem;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;}
+  .play-btn{width:3.5rem;height:3.5rem;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold);transition:all 0.3s;}
+  .reel-card:hover .play-btn{background:var(--gold);color:var(--navy);}
+  .imdb-link{display:inline-flex;align-items:center;gap:0.5rem;margin-top:1.5rem;padding:0.6rem 1.4rem;background:#f5c518;color:#000;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-decoration:none;border-radius:2px;transition:opacity 0.3s;}
+  .imdb-link:hover{opacity:0.85;}
+
+  #gallery{background:var(--navy-mid);}
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+  .gallery-item{aspect-ratio:3/4;background:var(--navy-light);border:1px solid var(--navy-border);overflow:hidden;position:relative;transition:border-color 0.3s;cursor:pointer;}
+  .gallery-item:hover{border-color:var(--gold);}
+  .gallery-item img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+  .img-label{position:absolute;bottom:0;left:0;right:0;padding:0.6rem 0.8rem;background:linear-gradient(transparent,rgba(13,27,42,0.9));font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);opacity:0;transition:opacity 0.3s;}
+  .gallery-item:hover .img-label{opacity:1;}
+
+  #boxing{background:var(--navy);}
+  .boxing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+
+  #contact{background:var(--navy-mid);text-align:center;}
+  .contact-inner{max-width:700px;margin:0 auto;}
+  .contact-tagline{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--white-dim);margin:1.5rem 0 3rem;}
+  .contact-cards{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+  .contact-card{background:var(--navy-light);border:1px solid var(--navy-border);padding:1.8rem 2rem;min-width:180px;text-align:center;}
+  .contact-card-label{font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;display:block;}
+  .contact-card a{color:var(--white);text-decoration:none;transition:color 0.3s;}
+  .contact-card a:hover{color:var(--gold);}
+  .contact-card p{font-size:0.82rem;color:var(--white);line-height:1.8;}
+  .contact-card .sub{font-size:0.72rem;color:var(--white-dim);}
+
+  footer{padding:2rem 4rem;border-top:1px solid var(--navy-border);display:flex;justify-content:space-between;align-items:center;}
+  footer p{font-size:0.65rem;letter-spacing:0.15em;color:var(--white-dim);}
+  footer .footer-name{font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.15em;color:var(--gold);}
+
+  /* LIGHTBOX */
+  .lightbox-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:1000;align-items:center;justify-content:center;}
+  .lightbox-overlay.active{display:flex;}
+  .lightbox-img{max-width:90vw;max-height:90vh;object-fit:contain;box-shadow:0 0 60px rgba(0,0,0,0.8);}
+  .lightbox-close{position:fixed;top:1.5rem;right:2rem;font-size:2rem;color:var(--white-dim);cursor:pointer;z-index:1001;line-height:1;transition:color 0.2s;}
+  .lightbox-close:hover{color:var(--gold);}
+  .lightbox-prev,.lightbox-next{position:fixed;top:50%;transform:translateY(-50%);font-size:3rem;color:var(--white-dim);cursor:pointer;z-index:1001;padding:1rem;transition:color 0.2s;user-select:none;}
+  .lightbox-prev{left:0.5rem;}
+  .lightbox-next{right:0.5rem;}
+  .lightbox-prev:hover,.lightbox-next:hover{color:var(--gold);}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+  .hamburger{display:none;flex-direction:column;justify-content:space-between;width:24px;height:18px;cursor:pointer;position:relative;z-index:200;background:none;border:none;padding:0;}
+  .hamburger span{display:block;height:2px;width:100%;background:var(--white);border-radius:2px;transition:all 0.3s;}
+  .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+
+  @media(max-width:900px){
+    nav{padding:1.4rem 2rem;}
+    nav.open{height:100vh;}
+    .hamburger{display:flex;}
+    .nav-links{
+      display:none;flex-direction:column;gap:0;
+      position:fixed;top:0;left:0;right:0;bottom:0;
+      background:rgba(13,27,42,0.98);
+      justify-content:flex-start;align-items:center;
+      z-index:150;
+      padding-top:5rem;
+      overflow-y:auto;
+      -ms-overflow-style:none;
+      scrollbar-width:none;
+    }
+    .nav-links::-webkit-scrollbar{
+      display:none;
+    }
+    .nav-links.open{display:flex;}
+    .nav-links li{width:100%;text-align:center;}
+    .nav-links > li > a{display:block;padding:1.1rem 2rem;font-size:0.85rem;letter-spacing:0.25em;color:var(--white-dim);}
+    .nav-links > li > a:hover{color:var(--gold);}
+    .nav-dropdown > a::after{content:' ▾';}
+    .nav-submenu{position:static;transform:none;border:none;box-shadow:none;background:transparent;padding-top:0;min-width:unset;display:none;}
+    .nav-submenu.open{display:block;}
+    .nav-submenu li a{text-align:center;padding:0.6rem 2rem;font-size:0.72rem;border-bottom:none;color:var(--gold-light);}
+    section{padding:5rem 2rem;}
+    #hero{padding:0 2rem 4rem;}
+    .hero-photo-area{opacity:0.3;}
+    .hero-fade{width:100%;}
+    .resume-grid{grid-template-columns:1fr;gap:2rem;}
+    .reels-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+    .boxing-grid{grid-template-columns:repeat(2,1fr);}
+    .contact-cards{flex-direction:column;align-items:center;}
+    footer{flex-direction:column;gap:1rem;text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+    <nav>
+        <a href="#hero" class="nav-logo">Molly <span>Loch</span></a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#hero">Home</a></li>
+            <li class="nav-dropdown">
+                <a href="#gallery" id="galleryToggle">Gallery</a>
+                <ul class="nav-submenu" id="gallerySubmenu">
+                    <li><a href="#gallery">Headshots</a></li>
+                    <li><a href="#boxing">Boxing Shoot</a></li>
+                    <li><a href="#fulllength">Full Length</a></li>
+                </ul>
+            </li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#reels">Reels</a></li>
+            <li><a href="#featured-video">Filmography</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-lines"></div>
+        <div class="hero-photo-area">
+
+<img src="images/gallery/head/resized_SSP_7721.jpg" alt="Molly Loch">
+
+
+            <div class="hero-fade"></div>
+        </div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Actress &amp; Model · Atlanta, GA</p>
+            <h1 class="hero-name">Molly<br><em>Loch</em></h1>
+            <div class="hero-stats">
+                <div class="hero-stat"><span>Height</span>5&prime; 2&Prime;</div>
+                <div class="hero-stat"><span>Hair</span>Black</div>
+                <div class="hero-stat"><span>Eyes</span>Brown</div>
+            </div>
+            <p class="hero-tagline">Television · Film · Theatre · Modeling<br>Fluent in Khmer · Martial Arts · Atlanta-based</p>
+            <div class="hero-cta">
+                <a href="#reels" class="btn btn-solid">View Reel</a>
+                &nbsp;&nbsp;
+                <a href="#contact" class="btn">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- HEADSHOTS GALLERY -->
+    <section id="gallery">
+        <div class="section-header">
+            <p class="section-label">Photography</p>
+            <h2 class="section-title">Headshots</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="images/gallery/head/resized_SSP_7721.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+            <div class="gallery-item"><img src="images/gallery/head/resized_SSP_7727.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+            <div class="gallery-item"><img src="images/gallery/head/resized_SSP_7746.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+            <div class="gallery-item"><img src="images/gallery/head/resized_SSP_7753.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+        </div>
+    </section>
+
+    <!-- BOXING SHOOT -->
+    <section id="boxing">
+        <div class="section-header">
+            <p class="section-label">Action &amp; Fitness</p>
+            <h2 class="section-title">Boxing Shoot</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="boxing-grid">
+            <div class="gallery-item"><img src="images/gallery/boxing/150828_4.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+            <div class="gallery-item"><img src="images/gallery/boxing/150828_5.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+            <div class="gallery-item"><img src="images/gallery/boxing/150828_6.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+            <div class="gallery-item"><img src="images/gallery/boxing/150828_7.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+            <div class="gallery-item"><img src="images/gallery/boxing/150828_8.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+            <div class="gallery-item"><img src="images/gallery/boxing/150828_9.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+            <div class="gallery-item"><img src="images/gallery/boxing/150828_10.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+            <div class="gallery-item"><img src="images/gallery/boxing/150828_11.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+            <div class="gallery-item"><img src="images/gallery/boxing/150828_12.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+            <div class="gallery-item"><img src="images/gallery/boxing/150828_13.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+            <div class="gallery-item"><img src="images/gallery/boxing/150828_14.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+            <div class="gallery-item"><img src="images/gallery/boxing/150828_15.jpg" alt="Molly Loch"><div class="img-label">Theatrical</div></div>
+        </div>
+    </section>
+
+    <!-- FULL LENGTH GALLERY -->
+    <section id="fulllength" style="background:var(--navy-mid);">
+        <div class="section-header">
+            <p class="section-label">Photography</p>
+            <h2 class="section-title">Full Length</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="images/gallery/body/20141122_30.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/20141122_66.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4534.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4539.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4558.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4643.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4660A.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4756.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4760.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4786.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4886.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4887.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4933.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4968.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4976.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4986.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4988.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/IMG_4998.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/L=MOLLY.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/LOCH-=.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/LOCH.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/LOCH_MOLLY099.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/M=LOCH=.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/MOLLY0011LOCH.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/MOLLYpeLOCH.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+            <div class="gallery-item"><img src="images/gallery/body/MOLLY__L.jpg" alt="Molly Loch"><div class="img-label">Full Length</div></div>
+        </div>
+    </section>
+
+    <!-- RESUME -->
+    <section id="resume">
+        <div class="section-header">
+            <p class="section-label">Experience</p>
+            <h2 class="section-title">Resume</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="resume-grid">
+            <div class="resume-col">
+                <h3>Television</h3>
+                <div class="resume-item"><div class="resume-item-title">Death at the Mansion: Rebecca Zahau</div><div class="resume-item-sub">Lead Principal — Rebecca Zahau</div><div class="resume-item-detail">Dir: Bryan Gilder</div></div>
+                <div class="resume-item"><div class="resume-item-title">Brockmire</div><div class="resume-item-sub">Supporting — Elegance Lady</div><div class="resume-item-detail">Dir: Tim Kirkby</div></div>
+                <div class="resume-item"><div class="resume-item-title">Snapped Killer Couples 701</div><div class="resume-item-sub">Supporting — Fitness Boxer</div><div class="resume-item-detail">Dir: Christopher Mitchell</div></div>
+
+                <h3>Film</h3>
+                <div class="resume-item"><div class="resume-item-title">The Deadman's Playground</div><div class="resume-item-sub">Supporting — Host #1</div><div class="resume-item-detail">Dir: Dave Rajkumar</div></div>
+                <div class="resume-item"><div class="resume-item-title">The Dispute</div><div class="resume-item-sub">Supporting — Julie Holmes</div><div class="resume-item-detail">Dir: Tobie Famusipe / Monei Sutton</div></div>
+                <div class="resume-item"><div class="resume-item-title">Deceptive State</div><div class="resume-item-sub">Supporting — Senator Marie Lowen</div><div class="resume-item-detail">Dir: Eddie Tosh Cantle</div></div>
+                <div class="resume-item"><div class="resume-item-title">Valerie <em style="font-size:0.7rem;color:var(--gold)">(Amazon Prime)</em></div><div class="resume-item-sub">Supporting — Judge Loch</div><div class="resume-item-detail">Dir: Tyler Shawda / Wades Hampton</div></div>
+
+                <h3>Short Film</h3>
+                <div class="resume-item"><div class="resume-item-title">Forsight</div><div class="resume-item-sub">Supporting — Mother</div><div class="resume-item-detail">Dir: Dave Rajkumar / Emerald Hardy</div></div>
+                <div class="resume-item"><div class="resume-item-title">Wine, Whisky &amp; Lullabies</div><div class="resume-item-sub">Associate Producer</div></div>
+
+                <h3>Theatre</h3>
+                <div class="resume-item"><div class="resume-item-title">Sister Love</div><div class="resume-item-sub">Supporting — Mother</div><div class="resume-item-detail">Writer: Janell Brown</div></div>
+                <div class="resume-item"><div class="resume-item-title">A Hopeful Miracle</div><div class="resume-item-sub">Supporting — Angel</div><div class="resume-item-detail">Writers: Tionna Moore / Cycerli Ash</div></div>
+            </div>
+
+            <div class="resume-col">
+                <h3>Stand-In</h3>
+                <div class="resume-item"><div class="resume-item-title">DMZ</div><div class="resume-item-sub">Carmen / Cleo / Susie / Tenny / Nico</div><div class="resume-item-detail">Dir: Ernest Roscoe Dickerson</div></div>
+                <div class="resume-item"><div class="resume-item-title">The 5th Wave</div><div class="resume-item-sub">Technician</div><div class="resume-item-detail">Dir: J. Blakeson</div></div>
+                <div class="resume-item"><div class="resume-item-title">Being Mary Jane</div><div class="resume-item-sub">Scott &amp; Bryce Aentkovich</div><div class="resume-item-detail">Dir: Salim Akil / Regina King &amp; Others</div></div>
+
+                <h3>Modeling</h3>
+                <div class="resume-item"><div class="resume-item-title">The CScrubs Collection</div><div class="resume-item-sub">Scrubs Line Model</div><div class="resume-item-detail">Lydia Covington, Owner</div></div>
+                <div class="resume-item"><div class="resume-item-title">Cause for Elegance</div><div class="resume-item-sub">Showcase &amp; Runway Model</div><div class="resume-item-detail">Lady Jo Edwards, Founder / Owner</div></div>
+                <div class="resume-item"><div class="resume-item-title">Body Paint</div><div class="resume-item-sub">Body Paint Model</div><div class="resume-item-detail">Kate Tsocanos, Photographer / Artist</div></div>
+                <div class="resume-item"><div class="resume-item-title">Orange Whip Trainer</div><div class="resume-item-sub">Product Demonstrator</div><div class="resume-item-detail">Jim Hackenberg, CEO / Golfer / Trainer</div></div>
+
+                <h3>Stunt &amp; Combat Training</h3>
+                <div class="resume-item">
+                    <div class="resume-item-detail" style="line-height:2.2;">
+                        Stunt — Shawn Daniels<br>
+                        Actors Fight School — William &amp; Christian Almodovar<br>
+                        Fencing (Épée) — John Terris<br>
+                        Boxing — David Adams (Ex-Pro)<br>
+                        Kick Boxing — Stacey Edward<br>
+                        Choes Hapkido Karate Level 1 — John Gasstrom<br>
+                        On Camera Combatives — Ryan Monolopolus<br>
+                        ACT Tactical for Film (L1 &amp; L2) — Matthew Clanton<br>
+                        Ballroom Dancing (All Types) — James<br>
+                        Global Dance Goddess — Zaine Azhra<br>
+                        Belly Dance — Atlanta Belly Dancer Zaara<br>
+                        Guitar Level 1 — Tom Davis
+                    </div>
+                </div>
+
+                <h3>Special Skills</h3>
+                <div class="skills-grid">
+                    <span class="skill-tag">Speaks Khmer</span><span class="skill-tag">Photographer</span><span class="skill-tag">Videographer</span><span class="skill-tag">Public Relations</span><span class="skill-tag">Tennis</span><span class="skill-tag">Golf</span><span class="skill-tag">Soccer</span><span class="skill-tag">Pastry Decoration</span><span class="skill-tag">Runner</span><span class="skill-tag">Teleprompter</span><span class="skill-tag">Hiker</span><span class="skill-tag">Camper</span><span class="skill-tag">Martial Arts</span><span class="skill-tag">Fencing</span><span class="skill-tag">Boxing</span><span class="skill-tag">Belly Dance</span><span class="skill-tag">Ballroom Dance</span><span class="skill-tag">Guitar</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REELS -->
+    <section id="reels">
+        <div class="section-header">
+            <p class="section-label">Showreels</p>
+            <h2 class="section-title">Reels</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="reels-grid" style="grid-template-columns:1fr;gap:2rem;max-width:900px;margin:0 auto;">
+
+<a>
+            <div style="position:relative;aspect-ratio:16/9;width:100%;overflow:hidden;border:1px solid var(--navy-border);">
+                <iframe
+                    src="https://www.youtube.com/embed/V843JaXJdtM"
+                    title="Molly Loch — Featured Video"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    style="position:absolute;inset:0;width:100%;height:100%;">
+                </iframe>
+
+            </div>
+</a>
+<a>
+            <div style="position:relative;aspect-ratio:16/9;width:100%;overflow:hidden;border:1px solid var(--navy-border);">
+                <iframe
+                    src="https://www.youtube.com/embed/yHN_ZcvXj2E"
+                    title="How to Put Icing on a Pastry Bag and Ice a Cupcake — Simply Decorative"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    style="position:absolute;inset:0;width:100%;height:100%;">
+                </iframe>
+
+            </div>
+</a>
+
+        </div>
+
+
+        <div style="margin-top:2.5rem;">
+            <a href="https://m.imdb.com/name/nm6855696/" target="_blank" class="imdb-link">&#9733; View on IMDb — nm6855696</a>
+        </div>
+    </section>
+
+    <!-- FILMOGRAPHY -->
+    <section id="featured-video" style="background:var(--navy-mid);">
+        <div class="section-header">
+            <p class="section-label">Featured</p>
+            <h2 class="section-title">Filmography</h2>
+            <div class="divider"></div>
+        </div>
+        <div style="max-width:900px;margin:0 auto;">
+            <div style="position:relative;aspect-ratio:16/9;width:100%;overflow:hidden;border:1px solid var(--navy-border);">
+                <iframe
+                    src="https://www.youtube.com/embed/Xa2y557dMAE"
+                    title="Molly Loch — Filmography"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    style="position:absolute;inset:0;width:100%;height:100%;">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="contact-inner">
+            <p class="section-label">Let&rsquo;s Connect</p>
+            <h2 class="section-title">Contact</h2>
+            <div class="divider" style="margin:1.4rem auto 0;"></div>
+            <p class="contact-tagline">"Available for film, television, theatre, and modeling projects."</p>
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <span class="contact-card-label">Email</span>
+                    <p><a href="mailto:lochmolly@gmail.com">lochmolly@gmail.com</a></p>
+                </div>
+                <div class="contact-card">
+                    <span class="contact-card-label">Agent</span>
+                    <p>Rose Battle</p>
+                    <p class="sub">Ultimate Model &amp; Talent Agency, Inc.</p>
+                    <p><a href="tel:+17703228528">(770) 322-8528</a></p>
+                </div>
+                <div class="contact-card">
+                    <span class="contact-card-label">Address</span>
+                    <p>2057 Clairmont Rd</p>
+                    <p class="sub">Decatur, GA 30033</p>
+                    <p class="sub">United States</p>
+                </div>
+
+            </div>
+            <!-- Social Links -->
+            <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem;">
+                <a href="https://www.youtube.com/@mollyloch" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.4rem;border:1px solid var(--navy-border);color:var(--white-dim);text-decoration:none;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--navy-border)';this.style.color='var(--white-dim)'">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z" /></svg>
+                    YouTube
+                </a>
+                <a href="https://www.instagram.com/mollyloch" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.4rem;border:1px solid var(--navy-border);color:var(--white-dim);text-decoration:none;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--navy-border)';this.style.color='var(--white-dim)'">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.2 4.8 1.7 5 5 .1 1.3.1 1.6.1 4.9s0 3.6-.1 4.9c-.2 3.3-1.7 4.8-5 5-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-3.3-.2-4.8-1.7-5-5C2 16.6 2 16.3 2 13s0-3.6.1-4.9c.2-3.3 1.7-4.8 5-5C8.4 2.2 8.8 2.2 12 2.2zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9C.3 21.3 2.7 23.7 7.1 23.9 8.3 24 8.7 24 12 24s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z" /></svg>
+                    Instagram
+                </a>
+                <a href="https://www.facebook.com/mollyloch" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.4rem;border:1px solid var(--navy-border);color:var(--white-dim);text-decoration:none;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--navy-border)';this.style.color='var(--white-dim)'">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.1C24 5.4 18.6 0 12 0S0 5.4 0 12.1C0 18.1 4.4 23.1 10.1 24v-8.4H7.1v-3.5h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9v2.3h3.4l-.5 3.5h-2.8V24C19.6 23.1 24 18.1 24 12.1z" /></svg>
+                    Facebook
+                </a>
+                <a href="https://m.imdb.com/name/nm6855696/" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.4rem;background:#f5c518;color:#000;text-decoration:none;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;transition:opacity 0.3s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14.3 8H13V16h1.3c2.1 0 3.3-1.2 3.3-4S16.4 8 14.3 8zM21.6 0H2.4C1.1 0 0 1.1 0 2.4v19.2C0 22.9 1.1 24 2.4 24h19.2c1.3 0 2.4-1.1 2.4-2.4V2.4C24 1.1 22.9 0 21.6 0zM7 16H5V8h2v8zm4.5 0H9.7V8h1.8v8zm7.2-3.8c-.5 2.5-2.1 3.8-4.8 3.8H11.8V8h3.9c2.7 0 4.1 1.5 4.1 4.2-.1.7-.1 0-.1 0z" /></svg>
+                    IMDb
+                </a>
+            </div>
+            <div style="display:none">
+            </div>
+            <a href="mailto:lochmolly@gmail.com" class="btn">Send a Message</a>
+        </div>
+    </section>
+
+    <div style="border-top:1px solid var(--navy-border);padding:1.5rem 4rem;display:flex;justify-content:center;gap:1.5rem;background:var(--navy);">
+        <a href="https://www.youtube.com/@mollyloch" target="_blank" title="YouTube" style="color:var(--white-dim);transition:color 0.3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--white-dim)'"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z" /></svg></a>
+        <a href="https://www.instagram.com/mollyloch" target="_blank" title="Instagram" style="color:var(--white-dim);transition:color 0.3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--white-dim)'"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.2 4.8 1.7 5 5 .1 1.3.1 1.6.1 4.9s0 3.6-.1 4.9c-.2 3.3-1.7 4.8-5 5-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-3.3-.2-4.8-1.7-5-5C2 16.6 2 16.3 2 13s0-3.6.1-4.9c.2-3.3 1.7-4.8 5-5C8.4 2.2 8.8 2.2 12 2.2zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9C.3 21.3 2.7 23.7 7.1 23.9 8.3 24 8.7 24 12 24s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z" /></svg></a>
+        <a href="https://www.facebook.com/mollyloch" target="_blank" title="Facebook" style="color:var(--white-dim);transition:color 0.3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--white-dim)'"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.1C24 5.4 18.6 0 12 0S0 5.4 0 12.1C0 18.1 4.4 23.1 10.1 24v-8.4H7.1v-3.5h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9v2.3h3.4l-.5 3.5h-2.8V24C19.6 23.1 24 18.1 24 12.1z" /></svg></a>
+        <a href="https://m.imdb.com/name/nm6855696/" target="_blank" title="IMDb" style="color:var(--white-dim);transition:color 0.3s;" onmouseover="this.style.color='#f5c518'" onmouseout="this.style.color='var(--white-dim)'"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14.3 8H13V16h1.3c2.1 0 3.3-1.2 3.3-4S16.4 8 14.3 8zM21.6 0H2.4C1.1 0 0 1.1 0 2.4v19.2C0 22.9 1.1 24 2.4 24h19.2c1.3 0 2.4-1.1 2.4-2.4V2.4C24 1.1 22.9 0 21.6 0zM7 16H5V8h2v8zm4.5 0H9.7V8h1.8v8zm7.2-3.8c-.5 2.5-2.1 3.8-4.8 3.8H11.8V8h3.9c2.7 0 4.1 1.5 4.1 4.2-.1.7-.1 0-.1 0z" /></svg></a>
+    </div>
+    <footer>
+        <span class="footer-name">Molly Loch</span>
+        <p>&copy; 2025 Molly Loch &middot; All Rights Reserved</p>
+        <p>Actress &amp; Model &middot; Atlanta, GA</p>
+        <p style="font-size:0.6rem;color:var(--white-dim);opacity:0.5;">Version 1.03</p>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox-overlay" id="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&#x2715;</span>
+        <span class="lightbox-prev" id="lightboxPrev">&#8249;</span>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="">
+        <span class="lightbox-next" id="lightboxNext">&#8250;</span>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        // Nav setup
+        var galleryToggle = document.getElementById('galleryToggle');
+        var gallerySubmenu = document.getElementById('gallerySubmenu');
+        var hamburger = document.getElementById('hamburger');
+        var navLinks = document.getElementById('navLinks');
+        var nav = document.querySelector('nav');
+
+        function closeAll() {
+            hamburger.classList.remove('open');
+            navLinks.classList.remove('open');
+            gallerySubmenu.classList.remove('open');
+            nav.classList.remove('open');
+        }
+
+        function closeSubmenu() { gallerySubmenu.classList.remove('open'); }
+
+        // Hamburger toggle
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            hamburger.classList.toggle('open');
+            navLinks.classList.toggle('open');
+            nav.classList.toggle('open');
+            gallerySubmenu.classList.remove('open');
+        });
+
+        // Gallery toggle — toggle submenu on click
+        galleryToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            gallerySubmenu.classList.toggle('open');
+        });
+
+        // Close submenu when clicking outside the nav
+        document.addEventListener('click', function(e) {
+            if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                gallerySubmenu.classList.remove('open');
+            }
+        });
+
+        // Close nav when any gallery submenu link is clicked
+        gallerySubmenu.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                closeAll();
+            });
+        });
+
+        // Close nav when any top-level link (except Gallery toggle) is clicked
+        navLinks.querySelectorAll('li > a').forEach(function(link) {
+            if (link.id === 'galleryToggle') return;
+            link.addEventListener('click', function() {
+                closeAll();
+            });
+        });
+
+        // Lightbox
+        var lightboxImages = [];
+        var lightboxIndex = 0;
+        var lightbox = document.getElementById('lightbox');
+        var lightboxImg = document.getElementById('lightboxImg');
+
+        function openLightbox(index) {
+            lightboxImages = Array.from(document.querySelectorAll('.gallery-item img')).map(function (i) { return i.src; });
+            lightboxIndex = index;
+            lightboxImg.src = lightboxImages[lightboxIndex];
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        function lightboxNav(dir) {
+            lightboxIndex = (lightboxIndex + dir + lightboxImages.length) % lightboxImages.length;
+            lightboxImg.src = lightboxImages[lightboxIndex];
+        }
+
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+        document.getElementById('lightboxPrev').addEventListener('click', function (e) { e.stopPropagation(); lightboxNav(-1); });
+        document.getElementById('lightboxNext').addEventListener('click', function (e) { e.stopPropagation(); lightboxNav(1); });
+        lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+        document.addEventListener('keydown', function (e) {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') lightboxNav(-1);
+            if (e.key === 'ArrowRight') lightboxNav(1);
+        });
+
+        // Attach click to all gallery items across all sections          xxxxxxxxxxx
+        function attachGalleryClicks() {
+            var allItems = Array.from(document.querySelectorAll('.gallery-item img'));
+            allItems.forEach(function(img, idx) {
+                img.parentElement.style.cursor = 'pointer';
+                img.parentElement.addEventListener('click', function() {
+                    openLightbox(idx);
+                });
+            });
+        }
+
+        attachGalleryClicks();
+    </script>
+</body>
+</html>
