@@ -421,6 +421,7 @@
         </div>
     </section>
 
+    <!-- CONTACT -->
 <!-- Contact Form with Thank-You Message -->
 <section id="contact" style="padding: 50px 20px; background-color: #162030; font-family: 'Arial', sans-serif; color: #F5F2EE;">
   <div style="max-width: 600px; margin: 0 auto; text-align: center;">
@@ -429,58 +430,37 @@
             <div class="divider" style="margin:1.4rem auto 0;"></div>
             <p class="contact-tagline">"Available for film, television, theatre, and modeling projects."</p>
 
-    <form 
-      id="contactForm"
-      action="https://docs.google.com/forms/d/e/1FAIpQLScWzAI-vk5PjLnrzS_FCa-Oi4M_IIOq4qt5mzvqG2p_3nuD5Q/formResponse" 
-      method="POST" 
-      onsubmit="showThankYou(event)"
-      style="display: flex; flex-direction: column; gap: 15px; text-align: left;"
-    >
+        <form 
+            id="contactForm"
+            action="https://docs.google.com/forms/d/e/1FAIpQLScWzAI-vk5PjLnrzS_FCa-Oi4M_IIOq4qt5mzvqG2p_3nuD5Q/formResponse" 
+            method="POST"
+            target="hidden_iframe"
+            style="display: flex; flex-direction: column; gap: 15px; text-align: left;"
+        >
       <label style="font-weight: bold;">Name</label>
-      <input type="text" name="entry.2005620554" required style="padding: 10px; border: 1px solid #F5F2EE; border-radius: 5px; width: 100%; background-color: #1f2a40; color: #F5F2EE;">
+      <input type="text" name="entry.2005620554" required style="padding: 10px; border: 1px solid var(--gold); width: 100%; background-color: #1f2a40; color: #F5F2EE;">
 
       <label style="font-weight: bold;">Email</label>
-      <input type="email" name="entry.1045781291" required style="padding: 10px; border: 1px solid #F5F2EE; border-radius: 5px; width: 100%; background-color: #1f2a40; color: #F5F2EE;">
+      <input type="email" name="entry.1045781291" required style="padding: 10px; border: 1px solid var(--gold); width: 100%; background-color: #1f2a40; color: #F5F2EE;">
 
       <label style="font-weight: bold;">Message</label>
-      <textarea name="entry.839337160" required rows="5" style="padding: 10px; border: 1px solid #F5F2EE; border-radius: 5px; width: 100%; background-color: #1f2a40; color: #F5F2EE;"></textarea>
+      <textarea name="entry.839337160" required rows="5" style="padding: 10px; border: 1px solid var(--gold); width: 100%; background-color: #1f2a40; color: #F5F2EE;"></textarea>
 
-      <button type="submit" style="padding: 12px; background-color: #C9A96E; color: #232B32; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; font-weight: bold;">
+      <button type="submit" class="btn">
         Send Message
       </button>
     </form>
+
+    <!-- Hidden iframe used to submit the form without leaving the page -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
     <!-- Hidden thank-you message -->
     <div id="thankYouMessage" style="display:none; margin-top: 20px; font-size: 1.1rem; color: #C9A96E;">
       Thank you! Your message has been sent.
     </div>
+    <br><br>
   </div>
-</section>
-
-<script>
-  function showThankYou(event) {
-    event.preventDefault(); // prevent page from jumping
-    const form = document.getElementById('contactForm');
-    
-    // Submit the form via fetch to Google Forms
-    fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      mode: 'no-cors' // Google Forms doesn’t allow CORS
-    }).then(() => {
-      form.style.display = 'none'; // hide form
-      document.getElementById('thankYouMessage').style.display = 'block';
-    });
-  }
-</script>
-
-    <!-- CONTACT -->
-    <section id="contact">
         <div class="contact-inner">
-            <p class="section-label">Let&rsquo;s Connect</p>
-            <h2 class="section-title">Contact</h2>
-            <div class="divider" style="margin:1.4rem auto 0;"></div>
-            <p class="contact-tagline">"Available for film, television, theatre, and modeling projects."</p>
             <div class="contact-cards">
                 <div class="contact-card">
                     <span class="contact-card-label">Email</span>
@@ -521,9 +501,34 @@
             </div>
             <div style="display:none">
             </div>
-            <a href="mailto:lochmolly@gmail.com" class="btn">Send a Message</a>
+            <a href="mailto:lochmolly@gmail.com" class="btn">Email</a>
         </div>
-    </section>
+
+</section>
+
+<script>
+    (function(){
+        var form = document.getElementById('contactForm');
+        var thank = document.getElementById('thankYouMessage');
+        var iframe = document.getElementById('hidden_iframe');
+        var submitting = false;
+
+        // When the form is submitted, mark that we are submitting
+        form.addEventListener('submit', function(){
+            submitting = true;
+            var btn = form.querySelector('button[type="submit"]');
+            if (btn) btn.disabled = true;
+        });
+
+        // When the hidden iframe loads after submission, show thank-you
+        iframe.addEventListener('load', function(){
+            if (!submitting) return;
+            form.style.display = 'none';
+            thank.style.display = 'block';
+            submitting = false;
+        });
+    })();
+</script>
 
     <div style="border-top:1px solid var(--navy-border);padding:1.5rem 4rem;display:flex;justify-content:center;gap:1.5rem;background:var(--navy);">
         <a href="https://www.youtube.com/@mloch27" target="_blank" title="YouTube" style="color:var(--white-dim);transition:color 0.3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--white-dim)'"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z" /></svg></a>

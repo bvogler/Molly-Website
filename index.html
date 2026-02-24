@@ -430,13 +430,13 @@
             <div class="divider" style="margin:1.4rem auto 0;"></div>
             <p class="contact-tagline">"Available for film, television, theatre, and modeling projects."</p>
 
-    <form 
-      id="contactForm"
-      action="https://docs.google.com/forms/d/e/1FAIpQLScWzAI-vk5PjLnrzS_FCa-Oi4M_IIOq4qt5mzvqG2p_3nuD5Q/formResponse" 
-      method="POST" 
-      onsubmit="showThankYou(event)"
-      style="display: flex; flex-direction: column; gap: 15px; text-align: left;"
-    >
+        <form 
+            id="contactForm"
+            action="https://docs.google.com/forms/d/e/1FAIpQLScWzAI-vk5PjLnrzS_FCa-Oi4M_IIOq4qt5mzvqG2p_3nuD5Q/formResponse" 
+            method="POST"
+            target="hidden_iframe"
+            style="display: flex; flex-direction: column; gap: 15px; text-align: left;"
+        >
       <label style="font-weight: bold;">Name</label>
       <input type="text" name="entry.2005620554" required style="padding: 10px; border: 1px solid var(--gold); width: 100%; background-color: #1f2a40; color: #F5F2EE;">
 
@@ -450,6 +450,9 @@
         Send Message
       </button>
     </form>
+
+    <!-- Hidden iframe used to submit the form without leaving the page -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
     <!-- Hidden thank-you message -->
     <div id="thankYouMessage" style="display:none; margin-top: 20px; font-size: 1.1rem; color: #C9A96E;">
@@ -504,20 +507,27 @@
 </section>
 
 <script>
-  function showThankYou(event) {
-    event.preventDefault(); // prevent page from jumping
-    const form = document.getElementById('contactForm');
-    
-    // Submit the form via fetch to Google Forms
-    fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      mode: 'no-cors' // Google Forms doesn’t allow CORS
-    }).then(() => {
-      form.style.display = 'none'; // hide form
-      document.getElementById('thankYouMessage').style.display = 'block';
-    });
-  }
+    (function(){
+        var form = document.getElementById('contactForm');
+        var thank = document.getElementById('thankYouMessage');
+        var iframe = document.getElementById('hidden_iframe');
+        var submitting = false;
+
+        // When the form is submitted, mark that we are submitting
+        form.addEventListener('submit', function(){
+            submitting = true;
+            var btn = form.querySelector('button[type="submit"]');
+            if (btn) btn.disabled = true;
+        });
+
+        // When the hidden iframe loads after submission, show thank-you
+        iframe.addEventListener('load', function(){
+            if (!submitting) return;
+            form.style.display = 'none';
+            thank.style.display = 'block';
+            submitting = false;
+        });
+    })();
 </script>
 
     <div style="border-top:1px solid var(--navy-border);padding:1.5rem 4rem;display:flex;justify-content:center;gap:1.5rem;background:var(--navy);">
@@ -530,7 +540,7 @@
         <span class="footer-name">Molly Loch</span>
         <p>&copy; 2026 Molly Loch &middot; All Rights Reserved</p>
         <p>Actress &amp; Model &middot; Atlanta, GA</p>
-        <p style="font-size:0.6rem;color:var(--white-dim);opacity:0.5;">Version 1.07</p>
+        <p style="font-size:0.6rem;color:var(--white-dim);opacity:0.5;">Version 1.08</p>
     </footer>
 
     <!-- LIGHTBOX -->
