@@ -424,6 +424,8 @@
     <!-- CONTACT -->
 <!-- Contact Form with Thank-You Message -->
 <section id="contact" style="padding: 50px 20px; background-color: #162030; font-family: 'Arial', sans-serif; color: #F5F2EE;">
+
+<!--     
   <div style="max-width: 600px; margin: 0 auto; text-align: center;">
             <p class="section-label">Let&rsquo;s Connect</p>
             <h2 class="section-title">Contact</h2>
@@ -450,14 +452,84 @@
         Send Message
       </button>
     </form>
-
+ -->
     <!-- Hidden iframe used to submit the form without leaving the page -->
+
+<!--     
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+ -->
 
     <!-- Hidden thank-you message -->
+<!--     
     <div id="thankYouMessage" style="display:none; margin-top: 20px; font-size: 1.1rem; color: #C9A96E;">
       Thank you! Your message has been sent.
     </div>
+ -->
+
+  <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <p class="section-label">Let&rsquo;s Connect</p>
+            <h2 class="section-title">Contact</h2>
+            <div class="divider" style="margin:1.4rem auto 0;"></div>
+            <p class="contact-tagline">"Available for film, television, theatre, and modeling projects."</p>
+
+  <div class="form-container">
+    <form id="MyContactForm"
+      style="display: flex; flex-direction: column; gap: 15px; text-align: left;">
+      <label style="font-weight: bold;">Name</label>
+      <input type="text" name="name" placeholder="Name" required style="padding: 10px; border: 1px solid var(--gold); width: 100%; background-color: #1f2a40; color: #F5F2EE;"/>
+      <label style="font-weight: bold;">Email</label>
+      <input type="email" name="email" placeholder="Email" required style="padding: 10px; border: 1px solid var(--gold); width: 100%; background-color: #1f2a40; color: #F5F2EE;"/>
+      <label style="font-weight: bold;">Message</label>
+      <textarea name="message" placeholder="Message" rows="5" required style="padding: 10px; border: 1px solid var(--gold); width: 100%; background-color: #1f2a40; color: #F5F2EE;"></textarea>
+
+      <button type="submit" class="btn">
+        Send Message
+      </button>
+
+    </form>
+    <div class="message" id="responseMessage"></div>
+  </div>
+
+<script>
+    const form = document.getElementById('MyContactForm');
+    const responseMessage = document.getElementById('responseMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = new FormData(form);
+      const params = new URLSearchParams(data);
+
+
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbz97h0BQmEazfS41ncADN1KN2_qKYXS8qhdl5SWs6vbpYOmdmhQvAJOxkfHgiasOyX9eQ/exec', {
+          method: 'POST',
+          body: params
+        });
+
+        const result = await response.json();
+        if(result.status === "success") {
+          responseMessage.style.color = 'var(--gold)';
+const now = new Date();
+const time = now.toLocaleTimeString(); // e.g. 14:32:10
+
+responseMessage.textContent = `Message sent successfully! (${time})`;
+
+//          responseMessage.textContent = "Message sent successfully!";
+          form.reset();
+        } else {
+          responseMessage.style.color = 'red';
+          responseMessage.textContent = "Error: " + result.message;
+        }
+      } catch (err) {
+        responseMessage.style.color = 'red';
+        responseMessage.textContent = "Network error: " + err.message;
+        console.error(err);
+      }
+    });
+  </script>
+
+
     <br><br>
   </div>
         <div class="contact-inner">
@@ -506,29 +578,6 @@
 
 </section>
 
-<script>
-    (function(){
-        var form = document.getElementById('contactForm');
-        var thank = document.getElementById('thankYouMessage');
-        var iframe = document.getElementById('hidden_iframe');
-        var submitting = false;
-
-        // When the form is submitted, mark that we are submitting
-        form.addEventListener('submit', function(){
-            submitting = true;
-            var btn = form.querySelector('button[type="submit"]');
-            if (btn) btn.disabled = true;
-        });
-
-        // When the hidden iframe loads after submission, show thank-you
-        iframe.addEventListener('load', function(){
-            if (!submitting) return;
-            form.style.display = 'none';
-            thank.style.display = 'block';
-            submitting = false;
-        });
-    })();
-</script>
 
     <div style="border-top:1px solid var(--navy-border);padding:1.5rem 4rem;display:flex;justify-content:center;gap:1.5rem;background:var(--navy);">
         <a href="https://www.youtube.com/@mloch27" target="_blank" title="YouTube" style="color:var(--white-dim);transition:color 0.3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--white-dim)'"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z" /></svg></a>
@@ -540,7 +589,7 @@
         <span class="footer-name">Molly Loch</span>
         <p>&copy; 2026 Molly Loch &middot; All Rights Reserved</p>
         <p>Actress &amp; Model &middot; Atlanta, GA</p>
-        <p style="font-size:0.6rem;color:var(--white-dim);opacity:0.5;">Version 1.08</p>
+        <p style="font-size:0.6rem;color:var(--white-dim);opacity:0.5;">Version 1.09</p>
     </footer>
 
     <!-- LIGHTBOX -->
