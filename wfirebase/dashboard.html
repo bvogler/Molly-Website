@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
+<script src="auth.js"></script>
+</head>
+<body>
+
+<h2>Dashboard</h2>
+<p>Welcome, <span id="user-email"></span>!</p>
+<button onclick="logout()">Logout</button>
+
+<script>
+  // Protect page
+  protectPage();
+
+  // Show logged-in user email
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      document.getElementById('user-email').innerText = user.email;
+    }
+  });
+</script>
+
+</body>
+</html>
