@@ -382,7 +382,7 @@
             <div style="position:relative;aspect-ratio:16/9;width:100%;overflow:hidden;border:1px solid var(--navy-border);">
                 <iframe
                     src="https://www.youtube.com/embed/yHN_ZcvXj2E"
-                    title="How to Put Icing on a Pastry Bag and Ice a Cupcake — Simply Decorative"
+                    title="Molly Loch Reel May 2025"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen
@@ -424,47 +424,6 @@
     <!-- CONTACT -->
 <!-- Contact Form with Thank-You Message -->
 <section id="contact" style="padding: 50px 20px; background-color: #162030; font-family: 'Arial', sans-serif; color: #F5F2EE;">
-
-<!--     
-  <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-            <p class="section-label">Let&rsquo;s Connect</p>
-            <h2 class="section-title">Contact</h2>
-            <div class="divider" style="margin:1.4rem auto 0;"></div>
-            <p class="contact-tagline">"Available for film, television, theatre, and modeling projects."</p>
-
-        <form 
-            id="contactForm"
-            action="https://docs.google.com/forms/d/e/1FAIpQLScWzAI-vk5PjLnrzS_FCa-Oi4M_IIOq4qt5mzvqG2p_3nuD5Q/formResponse" 
-            method="POST"
-            target="hidden_iframe"
-            style="display: flex; flex-direction: column; gap: 15px; text-align: left;"
-        >
-      <label style="font-weight: bold;">Name</label>
-      <input type="text" name="entry.2005620554" required style="padding: 10px; border: 1px solid var(--gold); width: 100%; background-color: #1f2a40; color: #F5F2EE;">
-
-      <label style="font-weight: bold;">Email</label>
-      <input type="email" name="entry.1045781291" required style="padding: 10px; border: 1px solid var(--gold); width: 100%; background-color: #1f2a40; color: #F5F2EE;">
-
-      <label style="font-weight: bold;">Message</label>
-      <textarea name="entry.839337160" required rows="5" style="padding: 10px; border: 1px solid var(--gold); width: 100%; background-color: #1f2a40; color: #F5F2EE;"></textarea>
-
-      <button type="submit" class="btn">
-        Send Message
-      </button>
-    </form>
- -->
-    <!-- Hidden iframe used to submit the form without leaving the page -->
-
-<!--     
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
- -->
-
-    <!-- Hidden thank-you message -->
-<!--     
-    <div id="thankYouMessage" style="display:none; margin-top: 20px; font-size: 1.1rem; color: #C9A96E;">
-      Thank you! Your message has been sent.
-    </div>
- -->
 
   <div style="max-width: 600px; margin: 0 auto; text-align: center;">
             <p class="section-label">Let&rsquo;s Connect</p>
@@ -589,7 +548,7 @@ responseMessage.textContent = `Message sent successfully! (${time})`;
         <span class="footer-name">Molly Loch</span>
         <p>&copy; 2026 Molly Loch &middot; All Rights Reserved</p>
         <p>Actress &amp; Model &middot; Atlanta, GA</p>
-        <p style="font-size:0.6rem;color:var(--white-dim);opacity:0.5;">Version 1.012</p>
+        <p style="font-size:0.6rem;color:var(--white-dim);opacity:0.5;">Version<span id="version"></span></p>        
     </footer>
 
     <!-- LIGHTBOX -->
@@ -599,9 +558,10 @@ responseMessage.textContent = `Message sent successfully! (${time})`;
         <img class="lightbox-img" id="lightboxImg" src="" alt="">
         <span class="lightbox-next" id="lightboxNext">&#8250;</span>
     </div>
-
+    <script src="config.js"></script>
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
+        
         // Nav setup
         var galleryToggle = document.getElementById('galleryToggle');
         var gallerySubmenu = document.getElementById('gallerySubmenu');
@@ -702,5 +662,8 @@ responseMessage.textContent = `Message sent successfully! (${time})`;
 
         attachGalleryClicks();
     </script>
+<script>
+  document.getElementById("version").textContent = APP_VERSION;
+</script>
 </body>
 </html>
