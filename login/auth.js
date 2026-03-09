@@ -12,11 +12,14 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
+// Keep user logged in between visits
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+
 // Protect a page: redirect to login if not logged in
 function protectPage() {
   auth.onAuthStateChanged(user => {
     if (!user) {
-      if (!window.location.href.includes("index.html")) {
+      if (!window.location.pathname.includes("index.html")) {
         window.location.href = "index.html";
       }
     }
@@ -25,20 +28,30 @@ function protectPage() {
 
 // Logout function
 function logout() {
-  auth.signOut().then(() => {
-    window.location.href = "index.html";
-  });
+  auth.signOut()
+    .then(() => {
+      window.location.href = "index.html";
+    })
+    .catch(err => alert(err.message));
 }
 
 // Google login
 function googleLogin() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).catch(err => alert(err.message));
+
+  auth.signInWithPopup(provider)
+    .then(() => {
+      window.location.href = "dashboard.html";
+    })
+    .catch(err => {
+      alert(err.message);
+    });
 }
 
 // Send password reset email
 function resetPassword() {
   const email = document.getElementById('reset-email').value;
+
   if (!email) {
     alert("Please enter your email.");
     return;
@@ -46,7 +59,9 @@ function resetPassword() {
 
   auth.sendPasswordResetEmail(email)
     .then(() => {
-      alert(`Password reset email sent to ${email}`);
+      alert("Password reset email sent to " + email);
     })
-    .catch(err => alert(err.message));
+    .catch(err => {
+      alert(err.message);
+    });
 }
