@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
 
+<script src="config.js"></script>
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
@@ -330,5 +331,18 @@
   }
 </script>
 
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.getElementById("version").textContent = " " + SITE_VERSION;
+
+    const login = document.getElementById("footerLogin");
+    if (login) {
+        login.href = ADMIN_LOGIN_URL;
+    }
+
+});
+</script>
 </body>
 </html>

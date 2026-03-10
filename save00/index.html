@@ -450,6 +450,45 @@
     <div class="message" id="responseMessage"></div>
   </div>
 
+<script>
+    const form = document.getElementById('MyContactForm');
+    const responseMessage = document.getElementById('responseMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = new FormData(form);
+      const params = new URLSearchParams(data);
+
+
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbz97h0BQmEazfS41ncADN1KN2_qKYXS8qhdl5SWs6vbpYOmdmhQvAJOxkfHgiasOyX9eQ/exec', {
+          method: 'POST',
+          body: params
+        });
+
+        const result = await response.json();
+        if(result.status === "success") {
+          responseMessage.style.color = 'var(--gold)';
+const now = new Date();
+const time = now.toLocaleTimeString(); // e.g. 14:32:10
+
+responseMessage.textContent = `Message sent successfully! (${time})`;
+
+//          responseMessage.textContent = "Message sent successfully!";
+          form.reset();
+        } else {
+          responseMessage.style.color = 'red';
+          responseMessage.textContent = "Error: " + result.message;
+        }
+      } catch (err) {
+        responseMessage.style.color = 'red';
+        responseMessage.textContent = "Network error: " + err.message;
+        console.error(err);
+      }
+    });
+  </script>
+
 
     <br><br>
   </div>
@@ -515,14 +554,13 @@
     </footer>
 -->
 
-<footer>
-    <a id="footerLogin" class="footer-login">Login</a>
-    <p>&copy; 2026 Molly Loch &middot; All Rights Reserved</p>
-    <p>Actress &amp; Model &middot; Atlanta, GA</p>
-    <p style="font-size:0.6rem;color:var(--white-dim);opacity:0.5;">Version<span id="version"></span></p>        
+    <footer>
+        <a href="https://bkvogler.com/molly_admin/index.html" class="footer-login">Login</a>
+        <p>&copy; 2026 Molly Loch &middot; All Rights Reserved</p>
+        <p>Actress &amp; Model &middot; Atlanta, GA</p>
+        <p style="font-size:0.6rem;color:var(--white-dim);opacity:0.5;">Version<span id="version"></span></p>        
+    </footer>
 
-
-</footer>
 
     <!-- LIGHTBOX -->
     <div class="lightbox-overlay" id="lightbox">
@@ -531,53 +569,8 @@
         <img class="lightbox-img" id="lightboxImg" src="" alt="">
         <span class="lightbox-next" id="lightboxNext">&#8250;</span>
     </div>
-
-
-
     <script src="siteConfig.js"></script>
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-  
-<script>
-    const form = document.getElementById('MyContactForm');
-    const responseMessage = document.getElementById('responseMessage');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const data = new FormData(form);
-      const params = new URLSearchParams(data);
-
-
-      try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbz97h0BQmEazfS41ncADN1KN2_qKYXS8qhdl5SWs6vbpYOmdmhQvAJOxkfHgiasOyX9eQ/exec', {
-          method: 'POST',
-          body: params
-        });
-
-        const result = await response.json();
-        if(result.status === "success") {
-          responseMessage.style.color = 'var(--gold)';
-const now = new Date();
-const time = now.toLocaleTimeString(); // e.g. 14:32:10
-
-responseMessage.textContent = `Message sent successfully! (${time})`;
-
-//          responseMessage.textContent = "Message sent successfully!";
-          form.reset();
-        } else {
-          responseMessage.style.color = 'red';
-          responseMessage.textContent = "Error: " + result.message;
-        }
-      } catch (err) {
-        responseMessage.style.color = 'red';
-        responseMessage.textContent = "Network error: " + err.message;
-        console.error(err);
-      }
-    });
-  </script>
-
-
-
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
         
         // Nav setup
@@ -680,18 +673,8 @@ responseMessage.textContent = `Message sent successfully! (${time})`;
 
         attachGalleryClicks();
     </script>
-
-<script defer>
-document.addEventListener("DOMContentLoaded", function () {
-
-    document.getElementById("version").textContent = " " + SITE_VERSION;
-
-    const login = document.getElementById("footerLogin");
-    if (login) {
-        login.href = ADMIN_LOGIN_URL;
-    }
-
-});
+<script>
+  document.getElementById("version").textContent = SITE_VERSION;
 </script>
 </body>
 </html>
